@@ -16,8 +16,9 @@ Exemplo de Inferência Básica:
 
 ;; SAÍDA
 '((width number) (height number) (factor number))
-Exemplo com Conflito de Tipos:
 ```
+
+Exemplo com Conflito de Tipos:
 
 O analisador detecta quando uma variável é usada de maneiras conflitantes.
 
@@ -87,18 +88,17 @@ Essa arquitetura separa claramente **extração de evidências de tipo** da **re
 ## 🔬 Contexto Teórico: O Dilema dos Tipos
 Mesmo que o programador não defina os tipos, o computador fundamentalmente precisa deles. Uma CPU executa instruções de máquina distintas para somar dois inteiros e para somar dois números de ponto flutuante. A responsabilidade de preencher essa lacuna recai sobre o runtime da linguagem, que pode adotar diferentes estratégias:
 
-1. Interpretadores Puros
-A abordagem mais simples. O interpretador verifica os tipos de cada variável toda vez que uma operação é executada. É robusto, mas inerentemente lento, pois o mesmo trabalho de verificação é repetido em cada iteração de um loop, por exemplo. O scheme-type-infer é um modelo conceitual deste processo de verificação.
+1. **Interpretadores Puros**: A abordagem mais simples. O interpretador verifica os tipos de cada variável toda vez que uma operação é executada. É robusto, mas inerentemente lento, pois o mesmo trabalho de verificação é repetido em cada iteração de um loop, por exemplo. O scheme-type-infer é um modelo conceitual deste processo de verificação.
 
-2. Compiladores JIT (Just-In-Time)
-A solução moderna para a performance de linguagens dinâmicas (ex: V8 no JavaScript, PyPy). Um JIT atua como um otimizador adaptativo:
-- Ele começa interpretando o código.
-- Monitora o código em execução ("hot spots") e observa os tipos que são passados na prática.
-- Com base nessa observação, ele compila uma versão otimizada daquele trecho de código em linguagem de máquina nativa, assumindo que os tipos permanecerão os mesmos.
-- Se essa suposição falhar (uma função que sempre recebia inteiros de repente recebe uma string), o JIT descarta o código otimizado ("de-optimization") e volta para o modo de interpretação mais lento.
+2. **Compiladores JIT (Just-In-Time)**:A solução moderna para a performance de linguagens dinâmicas (ex: V8 no JavaScript, PyPy). Um JIT atua como um otimizador adaptativo:
+   - Ele começa interpretando o código.
+   - Monitora o código em execução ("hot spots") e observa os tipos que são passados na prática.
+   - Com base nessa observação, ele compila uma versão otimizada daquele trecho de código em linguagem de máquina nativa, assumindo que os tipos permanecerão os mesmos.
+   - Se essa suposição falhar (uma função que sempre recebia inteiros de repente recebe uma string), o JIT descarta o código otimizado ("de-optimization") e volta para o modo de interpretação mais lento.
 
 3. Compiladores Estáticos (AOT - Ahead-of-Time)
-Em linguagens como C++, Java ou Rust, os tipos são conhecidos em tempo de compilação. Isso permite ao compilador gerar o código de máquina mais otimizado possível desde o início. Ele pode realizar otimizações profundas, como inlining de funções e alocação de memória na stack, pois não há ambiguidade sobre o tamanho ou o layout dos dados.
+  Em linguagens como C++, Java ou Rust, os tipos são conhecidos em tempo de compilação. Isso permite ao compilador gerar o código de máquina mais otimizado possível desde o início. Ele pode realizar
+otimizações profundas, como inlining de funções e alocação de memória na stack, pois não há ambiguidade sobre o tamanho ou o layout dos dados.
 
 Este projeto, portanto, explora a pedra fundamental sobre a qual as estratégias de JIT e interpretadores são construídas: a capacidade de entender o código para inferir tipos.
 

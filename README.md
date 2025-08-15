@@ -1,5 +1,7 @@
-# scheme-type-infer
-Um motor de inferência de tipos simples e poderoso para um subconjunto da linguagem Scheme.
+# Ccheme-Type-Infer: Um motor de inferência de tipos simples e poderoso para um subconjunto da linguagem Scheme.
+![Language](https://img.shields.io/badge/Language-Scheme-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Status](https://img.shields.io/badge/Status-Conceitual-informational.svg)
 
 ## Demonstrativo
 O analisador inspeciona a definição de uma função e infere os tipos de seus parâmetros com base em como eles são utilizados com operadores primitivos.
@@ -78,7 +80,7 @@ O motor de inferência é estruturado de forma **modular e data-driven**, o que 
    - A detecção de conflito (`conflict?`) verifica se existem múltiplos tipos diferentes associados ao mesmo parâmetro.
 
 **Resumo do Ciclo de Inferência:**     
-Código Scheme → Análise recursiva por operadores → Atribuição de tipos → Consolidação com parâmetros → Resultado final     
+Código Scheme → Análise recursiva por operadores → Atribuição de tipos → Consolidação com parâmetros → Resultado final   
 
 Essa arquitetura separa claramente **extração de evidências de tipo** da **resolução final dos tipos**, permitindo evoluir cada parte sem afetar as demais.
 

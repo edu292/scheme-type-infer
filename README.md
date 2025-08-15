@@ -54,6 +54,34 @@ Linguagens dinâmicas como Scheme, Python e JavaScript oferecem grande **pratici
 
 Este projeto simula o primeiro passo que todo ambiente de execução de uma linguagem dinâmica deve dar: **descobrir a intenção do programador e inferir os tipos a partir do contexto**, um processo que serve de base para todas as otimizações subsequentes. Ele também serve como um excelente exemplo do poder da homoiconicidade de Lisp/Scheme, onde a sintaxe (código como estrutura de dados) permite uma poderosa manipulação de código de forma elegante.
 
+## ⚙️ Detalhamento do Funcionamento Interno
+
+O motor de inferência é estruturado de forma **modular e data-driven**, o que facilita a manutenção e a expansão da lista de operadores suportados. O fluxo principal ocorre em três etapas encadeadas:
+
+1. **Mapeamento de Operadores para Tipos**  
+   - Uma tabela (`primitive-types`) define a correlação entre operadores built-in do Scheme e o tipo de dado que eles exigem/trabalham (`number`, `sentence-or-word`, `list`, etc.).  
+   - Essa abordagem permite adicionar ou remover operadores suportados apenas alterando a tabela, sem mexer na lógica de inferência.
+
+2. **Percurso Recursivo da Árvore Sintática (AST)**  
+   - A função `infer` percorre a estrutura do código (representada como listas, aproveitando a homoiconicidade do Lisp/Scheme).  
+   - Para cada expressão:
+     - Se for um operador conhecido, atribui o tipo correspondente aos seus argumentos (`assign`).
+     - Se um argumento for outra expressão em vez de um símbolo, é feita uma chamada recursiva para analisá-lo.
+     - Caso o operador seja um símbolo não mapeado, é tratado como uma chamada de procedimento, atribuindo tipo `procedure`.
+
+3. **Consolidação e Resolução de Conflitos**  
+   - A função `inferred-types` cruza os parâmetros declarados da função com os tipos inferidos no corpo.  
+   - Cada parâmetro pode ter:
+     - Um **tipo único** → é inferido diretamente.
+     - **Conflito de tipos** (ex.: usado como `number` e `sentence-or-word`) → marcado como `x`.
+     - **Tipo desconhecido** (nunca usado em contexto tipado) → marcado como `?`.
+   - A detecção de conflito (`conflict?`) verifica se existem múltiplos tipos diferentes associados ao mesmo parâmetro.
+
+**Resumo do Ciclo de Inferência:**     
+Código Scheme → Análise recursiva por operadores → Atribuição de tipos → Consolidação com parâmetros → Resultado final     
+
+Essa arquitetura separa claramente **extração de evidências de tipo** da **resolução final dos tipos**, permitindo evoluir cada parte sem afetar as demais.
+
 ## 🔬 Contexto Teórico: O Dilema dos Tipos
 Mesmo que o programador não defina os tipos, o computador fundamentalmente precisa deles. Uma CPU executa instruções de máquina distintas para somar dois inteiros e para somar dois números de ponto flutuante. A responsabilidade de preencher essa lacuna recai sobre o runtime da linguagem, que pode adotar diferentes estratégias:
 

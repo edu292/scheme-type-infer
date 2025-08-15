@@ -47,7 +47,7 @@ Se um parâmetro não for utilizado com um operador primitivo, seu tipo permanec
 ```
 
 ## 🎯 Sobre o Projeto
-Este projeto é uma implementação de um analisador de inferência de tipos para a linguagem de programação Scheme. Nascido a partir de um exercício do renomado curso CS61A (Structure and Interpretation of Computer Programs), o projeto foi expandido por puro interesse em explorar os mecanismos internos de sistemas de tipos em linguagens dinâmicas.
+Este projeto é uma implementação de um analisador de inferência de tipos para a linguagem de programação Scheme. Nascido a partir de um exercício do renomado curso CS61A baseado no SICP (Structure and Interpretation of Computer Programs), o projeto foi expandido por puro interesse em explorar os mecanismos internos de sistemas de tipos em linguagens dinâmicas.
 
 O objetivo é ir além da implementação e investigar um dilema central da engenharia de software: o *trade-off* entre a **flexibilidade do desenvolvedor** e a **otimização da máquina**.
 

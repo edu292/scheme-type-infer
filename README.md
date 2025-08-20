@@ -1,4 +1,4 @@
-# Ccheme-Type-Infer: Um motor de inferência de tipos simples e poderoso para um subconjunto da linguagem Scheme.
+# Scheme-Type-Infer: Um motor de inferência de tipos simples e poderoso para um subconjunto da linguagem Scheme.
 ![Language](https://img.shields.io/badge/Language-Scheme-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Conceitual-informational.svg)
